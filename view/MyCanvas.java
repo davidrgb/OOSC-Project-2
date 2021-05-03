@@ -30,9 +30,9 @@ public class MyCanvas extends JPanel {
 
         Graphics2D g2 = (Graphics2D) g;
 
-        if (gameBoard.getEnemyComposite() != null) {
+        if (gameBoard.getEnemyComposite() != null && scoreDisplay == null) {
             scoreDisplay = new TextDraw("Score: " + gameBoard.getEnemyComposite().score, 5, GameBoard.HEIGHT - 10, Color.white, 18);
-            scoreDisplay.render(g2);
+            gameElements.add(scoreDisplay);
         }
 
         for (var e: gameElements) {

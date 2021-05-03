@@ -28,5 +28,9 @@ public class TextDraw extends GameElement {
     public void animate() {
         
     }
+
+    public void setText(String text) {
+        this.text = text;
+    }
     
 }

@@ -106,6 +106,10 @@ public class TimerListener implements ActionListener {
     private void update() {
         for (var e: gameBoard.getCanvas().getGameElements()) {
             e.animate();
+            if (e instanceof TextDraw) {
+                var scoreDisplay = (TextDraw) e;
+                scoreDisplay.setText("Score: " + gameBoard.getEnemyComposite().score);
+            }
         }
     }
 
