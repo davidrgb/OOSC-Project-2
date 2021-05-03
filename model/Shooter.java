@@ -10,6 +10,8 @@ public class Shooter extends GameElement {
     public static final int UNIT_MOVE = 10;
     public static final int MAX_BULLETS = 3;
 
+    public static int extraBullets = 0;
+
     private ArrayList<GameElement> components = new ArrayList<>();
     private ArrayList<GameElement> weapons = new ArrayList<>();
 
@@ -42,7 +44,7 @@ public class Shooter extends GameElement {
     }
 
     public boolean canFireMoreBullet() {
-        return weapons.size() < MAX_BULLETS;
+        return weapons.size() < MAX_BULLETS + extraBullets;
     }
 
     public void removeBulletsOutOfBound() {

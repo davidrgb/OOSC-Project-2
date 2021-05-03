@@ -43,6 +43,7 @@ public class UFO extends GameElement {
                 gameBoard.getShooter().getWeapons().remove(i);
                 i = gameBoard.getShooter().getWeapons().size();
                 collision = true;
+                gameBoard.getShooter().extraBullets++;
             }
         }
         if (x > gameBoard.WIDTH) {
