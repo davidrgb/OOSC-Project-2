@@ -16,6 +16,8 @@ public class MyCanvas extends JPanel {
     private GameBoard gameBoard;
     private ArrayList<GameElement> gameElements = new ArrayList<>();
 
+    private TextDraw scoreDisplay;
+
     public MyCanvas(GameBoard gameBoard, int width, int height) {
         this.gameBoard = gameBoard;
         setBackground(Color.black);
@@ -27,6 +29,11 @@ public class MyCanvas extends JPanel {
         super.paintComponent(g);
 
         Graphics2D g2 = (Graphics2D) g;
+
+        if (gameBoard.getEnemyComposite() != null) {
+            scoreDisplay = new TextDraw("Score: " + gameBoard.getEnemyComposite().score, 5, GameBoard.HEIGHT - 10, Color.white, 18);
+            scoreDisplay.render(g2);
+        }
 
         for (var e: gameElements) {
             e.render(g2);
