@@ -21,6 +21,7 @@ public class EnemyComposite extends GameElement {
     private Random random = new Random();
 
     public boolean enemyReachedBottom = false;
+    public int score = 0;
 
     public EnemyComposite() {
         rows = new ArrayList<>();
@@ -129,6 +130,7 @@ public class EnemyComposite extends GameElement {
                     if (enemy.collideWith(bullet)) {
                         removeBullets.add(bullet);
                         removeEnemies.add(enemy);
+                        score++;
                     }
                 }
             }
@@ -156,7 +158,7 @@ public class EnemyComposite extends GameElement {
         for (var row: rows) {
             for (var e: row) {
                 e.y += 20;
-                if (e.y >=GameBoard.HEIGHT) {
+                if (e.y >= GameBoard.HEIGHT) {
                     enemyReachedBottom = true;
                 }
             }

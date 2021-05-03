@@ -1,5 +1,6 @@
 package controller;
 
+import java.awt.Color;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
 
@@ -8,6 +9,7 @@ import java.util.LinkedList;
 import model.Bullet;
 import model.Shooter;
 import view.GameBoard;
+import view.TextDraw;
 
 public class TimerListener implements ActionListener {
 
@@ -69,6 +71,10 @@ public class TimerListener implements ActionListener {
         shooter.removeBulletsOutOfBound();
         enemyComposite.removeBombsOutOfBound();
         enemyComposite.processCollision(shooter);
+        if (enemyComposite.enemyReachedBottom) {
+            gameBoard.getCanvas().getGameElements().clear();
+            gameBoard.getCanvas().getGameElements().add(new TextDraw("You Lost - Score: " + enemyComposite.score, 100, 100, Color.yellow, 30));
+        }
     }
 
     private void update() {
