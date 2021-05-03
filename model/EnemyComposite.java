@@ -21,6 +21,7 @@ public class EnemyComposite extends GameElement {
     private Random random = new Random();
 
     public boolean enemyReachedBottom = false;
+    public boolean noEnemies = false;
     public int score = 0;
 
     public EnemyComposite() {
@@ -135,6 +136,12 @@ public class EnemyComposite extends GameElement {
                 }
             }
             row.removeAll(removeEnemies);
+        }
+        for (int i = 0; i < rows.size(); i++) {
+            if (rows.get(i).isEmpty()) {
+                if (i == rows.size() - 1) noEnemies = true;
+            }
+            else i = rows.size();
         }
         shooter.getWeapons().removeAll(removeBullets);
 

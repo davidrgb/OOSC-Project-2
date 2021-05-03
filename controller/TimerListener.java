@@ -71,6 +71,10 @@ public class TimerListener implements ActionListener {
         shooter.removeBulletsOutOfBound();
         enemyComposite.removeBombsOutOfBound();
         enemyComposite.processCollision(shooter);
+        if (enemyComposite.noEnemies) {
+            gameBoard.getCanvas().getGameElements().clear();
+            gameBoard.getCanvas().getGameElements().add(new TextDraw("You Won - Score: " + enemyComposite.score, 100, 100, Color.yellow, 30));
+        }
         if (enemyComposite.enemyReachedBottom) {
             gameBoard.getCanvas().getGameElements().clear();
             gameBoard.getCanvas().getGameElements().add(new TextDraw("You Lost - Score: " + enemyComposite.score, 100, 100, Color.yellow, 30));
