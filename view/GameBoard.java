@@ -17,6 +17,7 @@ import model.EnemyComposite;
 import model.Shooter;
 import model.ShooterElement;
 import model.UFO;
+import model.UFOObserver;
 
 public class GameBoard {
 
@@ -34,6 +35,7 @@ public class GameBoard {
     private TimerListener timerListener;
 
     private UFO ufo;
+    private UFOObserver ufoObserver;
 
     public int ufoTimer;
 
@@ -66,6 +68,8 @@ public class GameBoard {
         timer = new Timer(DELAY, timerListener);
 
         Random random = new Random();
+
+        ufoObserver = new UFOObserver(this);
 
         startButton.addActionListener(event -> {
             shooter = new Shooter(GameBoard.WIDTH / 2, GameBoard.HEIGHT - ShooterElement.SIZE);
@@ -116,5 +120,9 @@ public class GameBoard {
     public void clearUfo() {
         canvas.getGameElements().remove(ufo);
         ufo = null;
+    }
+
+    public UFOObserver getUfoObserver() {
+        return ufoObserver;
     }
 }

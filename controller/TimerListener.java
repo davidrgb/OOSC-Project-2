@@ -10,6 +10,8 @@ import java.util.Random;
 import model.Bullet;
 import model.Shooter;
 import model.UFO;
+import model.UFOObserver;
+import model.UFO.Event;
 import view.GameBoard;
 import view.TextDraw;
 
@@ -73,6 +75,7 @@ public class TimerListener implements ActionListener {
 
         if (ufoCounter >= gameBoard.ufoTimer && gameBoard.getUfo() == null) {
             UFO ufo = new UFO();
+            ufo.addUFOListener(gameBoard.getUfoObserver());
             gameBoard.setUfo(ufo);
             gameBoard.getCanvas().getGameElements().add(ufo);
             ufoCounter = 0;
@@ -89,9 +92,12 @@ public class TimerListener implements ActionListener {
         enemyComposite.removeBombsOutOfBound();
         enemyComposite.processCollision(shooter);
         if (ufo != null) {
-            ufo.processCollision(gameBoard);
-            if (ufo.collision || ufo.offscreen) {
-                gameBoard.clearUfo();
+            for (int i = 0; i < shooter.getWeapons().size(); i++) {
+                if (ufo.collideWith(shooter.getWeapons().get(i))) {
+                    shooter.getWeapons().remove(i);
+                    ufo.notifyObservers(Event.Collision);
+                    i = shooter.getWeapons().size();
+                }
             }
         }
         if (enemyComposite.noEnemies) {
@@ -110,6 +116,13 @@ public class TimerListener implements ActionListener {
             if (e instanceof TextDraw) {
                 var scoreDisplay = (TextDraw) e;
                 scoreDisplay.setText("Score: " + gameBoard.getEnemyComposite().score);
+            }
+        }
+
+        var ufo = gameBoard.getUfo();
+        if (ufo != null) {
+            if (ufo.x > GameBoard.WIDTH) {
+                ufo.notifyObservers(Event.LeftScene);
             }
         }
     }
