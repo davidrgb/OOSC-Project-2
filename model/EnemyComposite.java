@@ -131,11 +131,13 @@ public class EnemyComposite extends GameElement {
                     if (enemy.collideWith(bullet)) {
                         removeBullets.add(bullet);
                         removeEnemies.add(enemy);
-                        score++;
                     }
                 }
             }
+            int sizeBefore = row.size();
             row.removeAll(removeEnemies);
+            int sizeAfter = row.size();
+            score += (sizeBefore - sizeAfter);
         }
         for (int i = 0; i < rows.size(); i++) {
             if (rows.get(i).isEmpty()) {

@@ -9,11 +9,14 @@ import javax.swing.JFrame;
 import javax.swing.JPanel;
 import javax.swing.Timer;
 
+import java.util.Random;
+
 import controller.KeyController;
 import controller.TimerListener;
 import model.EnemyComposite;
 import model.Shooter;
 import model.ShooterElement;
+import model.UFO;
 
 public class GameBoard {
 
@@ -29,6 +32,10 @@ public class GameBoard {
     private EnemyComposite enemyComposite;
     private Timer timer;
     private TimerListener timerListener;
+
+    private UFO ufo;
+
+    public int ufoTimer;
 
     public GameBoard(JFrame window) {
         this.window = window;
@@ -58,9 +65,13 @@ public class GameBoard {
         timerListener = new TimerListener(this);
         timer = new Timer(DELAY, timerListener);
 
+        Random random = new Random();
+
         startButton.addActionListener(event -> {
             shooter = new Shooter(GameBoard.WIDTH / 2, GameBoard.HEIGHT - ShooterElement.SIZE);
             enemyComposite = new EnemyComposite();
+            ufo = null;
+            ufoTimer = random.nextInt(FPS * 10);
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
@@ -88,5 +99,22 @@ public class GameBoard {
 
     public EnemyComposite getEnemyComposite() {
         return enemyComposite;
+    }
+
+    public void setShooter(Shooter shooter) {
+        this.shooter = shooter;
+    }
+
+    public UFO getUfo() {
+        return ufo;
+    }
+
+    public void setUfo(UFO ufo) {
+        this.ufo = ufo;
+    }
+
+    public void clearUfo() {
+        canvas.getGameElements().remove(ufo);
+        ufo = null;
     }
 }
