@@ -75,7 +75,8 @@ public class TimerListener implements ActionListener {
             UFO ufo = new UFO();
             gameBoard.setUfo(ufo);
             gameBoard.getCanvas().getGameElements().add(ufo);
-            gameBoard.ufoTimer = ufoCounter + random.nextInt(FPS * 10);
+            ufoCounter = 0;
+            gameBoard.ufoTimer = random.nextInt(FPS * 10);
         }
     }
 
