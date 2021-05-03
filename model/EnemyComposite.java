@@ -20,6 +20,8 @@ public class EnemyComposite extends GameElement {
     private boolean movingToRight = true;
     private Random random = new Random();
 
+    public boolean enemyReachedBottom = false;
+
     public EnemyComposite() {
         rows = new ArrayList<>();
         bombs = new ArrayList<>();
@@ -55,12 +57,14 @@ public class EnemyComposite extends GameElement {
             if (rightEnd() >= GameBoard.WIDTH) {
                 dx = -dx;
                 movingToRight = false;
+                advance();
             }
         } else {
             dx = -dx;
             if (leftEnd() <= 0) {
                 dx = -dx;
                 movingToRight = true;
+                advance();
             }
         }
 
@@ -146,6 +150,16 @@ public class EnemyComposite extends GameElement {
 
         shooter.getWeapons().removeAll(removeBullets);
         bombs.removeAll(removeBombs);
-    }   
-    
+    }
+
+    public void advance() {
+        for (var row: rows) {
+            for (var e: row) {
+                e.y += 20;
+                if (e.y >=GameBoard.HEIGHT) {
+                    enemyReachedBottom = true;
+                }
+            }
+        }
+    }
 }
