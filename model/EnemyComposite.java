@@ -213,12 +213,14 @@ public class EnemyComposite extends GameElement {
                 }
             }
         }
-        if (advances >= ADVANCES_CLOSE) {
-            state = new ProximityStateClose(this);
+        if (advances == ADVANCES_MID || advances == ADVANCES_CLOSE) {
+            goNextState();
         }
-        else if (advances >= ADVANCES_MID) {
-            state = new ProximityStateMid(this);
-        }
+        
+    }
+
+    public void goNextState() {
+        state.goNext(this);
     }
 
     public void setState(ProximityState state) {

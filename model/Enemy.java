@@ -9,18 +9,10 @@ public class Enemy extends GameElement {
 
     public Enemy(int x, int y, int size, Color color, boolean filled) {
         super(x, y, color, filled, size, size);
-        //renderStrategy = new EnemyRenderFarStrategy(this);
     }
 
     @Override
     public void render(Graphics2D g2) {
-        /*g2.setColor(color);
-        if (filled) {
-            g2.fillRect(x, y, width, height);
-        }
-        else {
-            g2.drawRect(x, y, width, height);
-        }*/
         renderStrategy.renderAlgorithm(g2);
     }
 
