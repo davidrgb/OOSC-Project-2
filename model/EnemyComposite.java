@@ -23,6 +23,12 @@ public class EnemyComposite extends GameElement {
     public boolean enemyReachedBottom = false;
     public boolean noEnemies = false;
     public int score = 0;
+    public int advances = 0;
+
+    private static final int ADVANCES_MID = 5;
+    private static final int ADVANCES_CLOSE = 8;
+
+    private ProximityState state;
 
     public EnemyComposite() {
         rows = new ArrayList<>();
@@ -37,6 +43,8 @@ public class EnemyComposite extends GameElement {
                 ));
             }
         }
+
+        state = new ProximityStateFar(this);
     }
 
     @Override
@@ -196,6 +204,7 @@ public class EnemyComposite extends GameElement {
     }
 
     public void advance() {
+        advances++;
         for (var row: rows) {
             for (var e: row) {
                 e.y += 20;
@@ -204,5 +213,19 @@ public class EnemyComposite extends GameElement {
                 }
             }
         }
+        if (advances >= ADVANCES_CLOSE) {
+            state = new ProximityStateClose(this);
+        }
+        else if (advances >= ADVANCES_MID) {
+            state = new ProximityStateMid(this);
+        }
+    }
+
+    public void setState(ProximityState state) {
+        this.state = state;
+    }
+
+    public ArrayList<ArrayList<GameElement>> getRows() {
+        return rows;
     }
 }
