@@ -79,6 +79,8 @@ public class GameBoard {
             canvas.getGameElements().clear();
             canvas.getGameElements().add(shooter);
             canvas.getGameElements().add(enemyComposite);
+            canvas.scoreDisplay = new TextDraw("Score: " + this.getEnemyComposite().score, 5, GameBoard.HEIGHT - 10, Color.white, 18);
+            canvas.getGameElements().add(canvas.scoreDisplay);
             timer.start();
         });
 
