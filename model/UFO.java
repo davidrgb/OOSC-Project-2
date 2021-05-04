@@ -48,21 +48,8 @@ public class UFO extends GameElement implements Subject {
         for (int i = 0; i < gameBoard.getShooter().getWeapons().size(); i++) {
             if (this.collideWith(gameBoard.getShooter().getWeapons().get(i))) {
                 gameBoard.getShooter().getWeapons().remove(i);
-                /*i = gameBoard.getShooter().getWeapons().size();
-                collision = true;
-                gameBoard.getShooter().extraBullets++;*/
             }
         }
-        /*if (x > gameBoard.WIDTH) {
-            offscreen = true;
-        }*/
-        /*if (collision) {
-            int x = gameBoard.getShooter().x;
-            int y = gameBoard.getShooter().y;
-            gameBoard.getCanvas().getGameElements().remove(gameBoard.getShooter());
-            gameBoard.setShooter(new Shooter(x, y));
-            gameBoard.getCanvas().getGameElements().add(gameBoard.getShooter());
-        }*/
     }
 
     @Override
